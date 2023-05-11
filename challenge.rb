@@ -9,33 +9,12 @@ def balanced_brackets?(string)
   }
 
   string.each_char do |char|
-    if(brackets.include?(char))
+    if brackets.key?(char)
       stack << char
-    else
-      case char
-      when ")"
-        if stack.last == "("
-          stack.pop
-          break
-        end
-      when "]"
-        if stack.last == "["
-          stack.pop
-          break
-        end
-      when "}"
-        if stack.last == "{"
-          stack.pop
-          break
-        end
-      return false
-
-
-      end
-    
+    elsif brackets.value?(char)
+      return false if brackets[stack.pop] != char
     end
   end
-
   return stack.empty?
 end
 
